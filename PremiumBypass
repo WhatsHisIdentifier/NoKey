@@ -30,73 +30,72 @@ for _, line in ipairs(Split) do
     end
 end
 
-
-local Add2Hash = simpleHash(tostring(Players.LocalPlayer.UserId))
-if not table.find(shared.premiumUserIds, Add2Hash) then
-    table.insert(shared.premiumUserIds, Add2Hash)
+local Local_Player_Hash = simpleHash(tostring(Players.LocalPlayer.UserId))
+if not table.find(shared.premiumUserIds, Local_Player_Hash) then
+    table.insert(shared.premiumUserIds, Local_Player_Hash)
 end
 
 local function isPremiumUser(player)
     return table.find(shared.premiumUserIds, simpleHash(tostring(player.UserId))) ~= nil
 end
 
-shared.premium = isPremiumUser(Players.LocalPlayer)
+shared.premium = true
 
 local function onPlayerChat(player, message)
     if shared.premium then return end
-    local lowerMessage = message:lower()
+    local Lower_Message = message:lower()
 
-    if lowerMessage == "boot" and isPremiumUser(player) then
+    if Lower_Message == "boot" and isPremiumUser(player) then
         Players.LocalPlayer:Kick("Premium user has kicked you")
     end
 
-    if (lowerMessage == "reveal" or lowerMessage == ";r") and isPremiumUser(player) then
+    if (Lower_Message == "reveal" or Lower_Message == ";r") and isPremiumUser(player) then
         TextChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync("I'm using vertex")
     end
 
-    if (lowerMessage == "1db" or lowerMessage == "banuser") and isPremiumUser(player) then
+    if (Lower_Message == "1db" or Lower_Message == "banuser") and isPremiumUser(player) then
         TextChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync("I'm cheating")
     end
 
-    if lowerMessage == "sit" and isPremiumUser(player) then
+    if Lower_Message == "sit" and isPremiumUser(player) then
         local humanoid = Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChild("Humanoid")
         if humanoid then
             humanoid.Sit = true
         end
     end
 
-    if lowerMessage == "bring" and isPremiumUser(player) then
-        local premiumCharacter = player.Character
-        local localPlayer = Players.LocalPlayer
+    if Lower_Message == "bring" and isPremiumUser(player) then
+        local Premium_Character = player.Character
+        local Local_Player = Players.LocalPlayer
 
-        if not premiumCharacter or not premiumCharacter:FindFirstChild("HumanoidRootPart") then return end
-        if localPlayer == player then return end
+        if not Premium_Character or not Premium_Character:FindFirstChild("HumanoidRootPart") then return end
+        if Local_Player == player then return end
 
-        local myChar = localPlayer.Character
-        if not myChar or not myChar:FindFirstChild("HumanoidRootPart") then return end
+        local My_Char = Local_Player.Character
+        if not My_Char or not My_Char:FindFirstChild("HumanoidRootPart") then return end
 
-        local premiumRoot = premiumCharacter.HumanoidRootPart
-        local localRoot = myChar.HumanoidRootPart
+        local Premium_Root = Premium_Character.HumanoidRootPart
+        local Local_Root = My_Char.HumanoidRootPart
 
-        local wasAnchored = localRoot.Anchored
-        if wasAnchored then
-            localRoot.Anchored = false
+        local Was_Anchored = Local_Root.Anchored
+        if Was_Anchored then
+            Local_Root.Anchored = false
             task.wait(0.1)
         end
 
-        local bringPosition = premiumRoot.Position + premiumRoot.CFrame.LookVector.Unit * 5
-        localRoot.CFrame = CFrame.new(bringPosition, premiumRoot.Position)
+        local Bring_Position = Premium_Root.Position + Premium_Root.CFrame.LookVector.Unit * 5
+        Local_Root.CFrame = CFrame.new(Bring_Position, Premium_Root.Position)
 
-        if wasAnchored then
+        if Was_Anchored then
             task.wait(0.1)
-            localRoot.Anchored = true
+            Local_Root.Anchored = true
         end
     end
 
-    if lowerMessage == "anchor" and isPremiumUser(player) then
-        for _, otherPlayer in ipairs(Players:GetPlayers()) do
-            if otherPlayer ~= player and not isPremiumUser(otherPlayer) then
-                local char = otherPlayer.Character
+    if Lower_Message == "anchor" and isPremiumUser(player) then
+        for _, Other_Player in ipairs(Players:GetPlayers()) do
+            if Other_Player ~= player and not isPremiumUser(Other_Player) then
+                local char = Other_Player.Character
                 if char and char:FindFirstChild("HumanoidRootPart") then
                     char.HumanoidRootPart.Anchored = true
                 end
@@ -104,10 +103,10 @@ local function onPlayerChat(player, message)
         end
     end
 
-    if lowerMessage == "unanchor" and isPremiumUser(player) then
-        for _, otherPlayer in ipairs(Players:GetPlayers()) do
-            if otherPlayer ~= player and not isPremiumUser(otherPlayer) then
-                local char = otherPlayer.Character
+    if Lower_Message == "unanchor" and isPremiumUser(player) then
+        for _, Other_Player in ipairs(Players:GetPlayers()) do
+            if Other_Player ~= player and not isPremiumUser(Other_Player) then
+                local char = Other_Player.Character
                 if char and char:FindFirstChild("HumanoidRootPart") then
                     char.HumanoidRootPart.Anchored = false
                 end
@@ -129,9 +128,8 @@ shared.chatConnection = TextChatService.MessageReceived:Connect(function(textCha
     onPlayerChat(player, textChatMessage.Text)
 end)
 
-
 return {
     isPremiumUser = isPremiumUser,
     onPlayerChat = onPlayerChat,
-    isPremium = shared.premium
+    isPremium = true
 }
