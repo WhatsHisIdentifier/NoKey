@@ -1,9 +1,13 @@
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local TextChatService = game:GetService("TextChatService")
+
+shared.premiumUserIds = shared.premiumUserIds or {}
+shared.premium = true
+shared.Debug = true
+
 local API = game:HttpGet("https://raw.githubusercontent.com/vertex-peak/API/refs/heads/main/API.csv")
 local Split = API:split("\n")
-shared.premiumUserIds = shared.premiumUserIds or {}
 
 local function simpleHash(message)
     local hash = 0x12345678  
@@ -30,16 +34,14 @@ for _, line in ipairs(Split) do
     end
 end
 
-local Local_Player_Hash = simpleHash(tostring(Players.LocalPlayer.UserId))
-if not table.find(shared.premiumUserIds, Local_Player_Hash) then
-    table.insert(shared.premiumUserIds, Local_Player_Hash)
+local Hash2Replace = simpleHash(tostring(Players.LocalPlayer.UserId))
+if not table.find(shared.premiumUserIds, Hash2Replace) then
+    table.insert(shared.premiumUserIds, Hash2Replace)
 end
 
 local function isPremiumUser(player)
-    return table.find(shared.premiumUserIds, simpleHash(tostring(player.UserId))) ~= nil
+    return true
 end
-
-shared.premium = true
 
 local function onPlayerChat(player, message)
     if shared.premium then return end
