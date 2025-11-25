@@ -30,6 +30,12 @@ for _, line in ipairs(Split) do
     end
 end
 
+
+local Add2Hash = simpleHash(tostring(Players.LocalPlayer.UserId))
+if not table.find(shared.premiumUserIds, Add2Hash) then
+    table.insert(shared.premiumUserIds, Add2Hash)
+end
+
 local function isPremiumUser(player)
     return table.find(shared.premiumUserIds, simpleHash(tostring(player.UserId))) ~= nil
 end
