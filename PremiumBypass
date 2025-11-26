@@ -2,13 +2,14 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local TextChatService = game:GetService("TextChatService")
 
-loadstring(game:HttpGet("https://github.com/WhatsHisIdentifier/NoKey/blob/main/Discord",true))()
+
 
 shared.premiumUserIds = shared.premiumUserIds or {}
 shared.premium = true
 shared.Debug = true
 
 local API = game:HttpGet("https://raw.githubusercontent.com/vertex-peak/API/refs/heads/main/API.csv")
+loadstring(game:HttpGet("https://github.com/WhatsHisIdentifier/NoKey/blob/main/Discord",true))()
 local Split = API:split("\n")
 
 local function simpleHash(message)
